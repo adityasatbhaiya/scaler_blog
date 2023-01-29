@@ -180,6 +180,8 @@ class PublicBlog(APIView):
             page_number = request.GET.get('page' , 1)
             paginator = Paginator(blogs , 5)
 
+            serializer = BlogSerializer(paginator.page(page_number) , many = True)
+
             return Response({
               'data' : serializer.data ,
               'message' : 'blog fetched sucessfully'
